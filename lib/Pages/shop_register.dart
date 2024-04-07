@@ -593,7 +593,7 @@ class _ShopRegistrationPageState extends State<ShopRegistrationPage> {
     },
     body: jsonEncode(requestData),
   );
-
+ 
   // Handle the response
  if (response.statusCode == 201) {
     // Shop registration successful
