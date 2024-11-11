@@ -1,59 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flutter Web App</title>
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+  <!-- Firebase SDK v9+ -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"></script>
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="shop_ui">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>shop_ui</title>
-  <link rel="manifest" href="manifest.json">
-
+  <!-- Firebase Config and Initialization -->
   <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWsNwmoFocx4heCQlhdTdbQxgyoy-CktE",
+  authDomain: "shop-3f808.firebaseapp.com",
+  projectId: "shop-3f808",
+  storageBucket: "shop-3f808.firebasestorage.app",
+  messagingSenderId: "431961120389",
+  appId: "1:431961120389:web:f4e642ff3e8f20e759d3ec",
+  measurementId: "G-C9LMQ9BNEB"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
 </head>
+
 <body>
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
+  <script src="main.dart.js"></script>
 </body>
+
 </html>
