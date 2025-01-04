@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -13,6 +12,8 @@ class Login extends StatefulWidget {
 
 class LoginState extends State<Login> {
   bool isChecked = false;
+  final TextEditingController _shopNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +62,9 @@ class LoginState extends State<Login> {
                       horizontal: 15,
                     ),
                     child: TextFormField(
+                      controller:
+                          _shopNameController, // Use the controller here
+
                       decoration: const InputDecoration(
                         hintText: "Search for a Company name",
                         border: InputBorder.none,
@@ -70,7 +74,9 @@ class LoginState extends State<Login> {
             ),
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
           child: Container(
@@ -101,7 +107,7 @@ class LoginState extends State<Login> {
                     ),
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        hintText: "Username/Email Address",
+                        hintText: "Name",
                         border: InputBorder.none,
                       ),
                     )),
@@ -109,7 +115,50 @@ class LoginState extends State<Login> {
             ),
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+          child: Container(
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              // ignore: sized_box_for_whitespace
+              child: Container(
+                height: 50,
+                width: 300,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                    ),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: "Email Address",
+                        border: InputBorder.none,
+                      ),
+                    )),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
           child: Container(
@@ -151,51 +200,63 @@ class LoginState extends State<Login> {
         const SizedBox(
           height: 30,
         ),
-         Padding(
-           padding: const EdgeInsets.only(left: 10),
-           child: Row(
-              children: [
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                    });
-                  },
-                ),
-                Text("Are you an owner?"),
-              ],
-            ),
-         ),
-         SizedBox(height: 10,),
-       ElevatedButton(
-            onPressed: () {
-              // Handle login based on the checkbox state
-              if (isChecked) {
-                 Navigator.pushReplacementNamed(context, '/ownerHome');
-              } else {
-                // Navigate to employee home page
-                 Navigator.pushReplacementNamed(context, '/employeeHome');
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ShopColor.shopUiColor1, // Background color
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Row(
+            children: [
+              Checkbox(
+                value: isChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isChecked = value ?? false;
+                  });
+                },
               ),
+              Text("Are you an owner?"),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            // Handle login based on the checkbox state
+            String shopName = _shopNameController.text.trim();
+
+            if (isChecked) {
+              Navigator.pushReplacementNamed(
+                context,
+                '/ownerHome',
+                arguments: shopName,
+              );
+            } else {
+              // Navigate to employee home page
+              Navigator.pushReplacementNamed(
+                context,
+                '/shopDetails', // Assuming /shopDetails is the route for ShopDetailsPage
+                arguments: shopName, // Passing shopName as argument
+              );
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ShopColor.shopUiColor1, // Background color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
-            // ignore: sized_box_for_whitespace
-            child: Container(
-              width: 60,
-              height: 40,
-              child: Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white),
-                ),
+          ),
+          // ignore: sized_box_for_whitespace
+          child: Container(
+            width: 60,
+            height: 40,
+            child: Center(
+              child: Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),
+        ),
         const SizedBox(
           height: 15,
         ),
@@ -219,8 +280,6 @@ class LoginState extends State<Login> {
             //       height:30 // adjust the fit as needed
             //     ),
             //  ),
-            
-
 
             // // Second Image
             //  Expanded(
@@ -231,25 +290,29 @@ class LoginState extends State<Login> {
             //       height:30 // adjust the fit as needed
             //     ),
             //  ),
-            
           ],
         ),
         const SizedBox(
           height: 30,
         ),
-        Container(
-          width: 250,
-          height: 40,
-        
-          decoration: BoxDecoration(
-            color: ShopColor.shopUiColor,
-            borderRadius: BorderRadius.circular(10),
+        GestureDetector(
+          onTap: () {
+            // Navigate to the Registration page when clicked
+            Navigator.pushNamed(context, '/register');
+          },
+          child: Container(
+            width: 250,
+            height: 40,
+            decoration: BoxDecoration(
+              color: ShopColor.shopUiColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: const Center(
+                child: Text(
+              'Want to register your Business',
+              style: TextStyle(color: Colors.white, fontSize: 15),
+            )),
           ),
-          child: const Center(
-              child: Text(
-            'Want to register your Business',
-            style: TextStyle(color: Colors.white, fontSize: 15),
-          )),
         ),
       ]),
     );

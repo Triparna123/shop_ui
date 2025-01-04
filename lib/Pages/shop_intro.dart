@@ -1,7 +1,11 @@
-// import 'package:flutter/material.dart';
+
+// import 'package:carousel_slider/carousel_controller.dart' as carousel_slider;
 // import 'package:carousel_slider/carousel_slider.dart';
+
+// import 'package:flutter/material.dart';
 // import 'package:shop_ui/Pages/login.dart';
 // import 'package:shop_ui/misc/shop_color.dart';
+// final carouselController = carousel_slider.CarouselController();
 
 // class ShopIntro extends StatefulWidget {
 //   const ShopIntro({super.key});
@@ -15,9 +19,9 @@
 
 //   int _currentPage = 0;
 //   final List<String> imageList = [
-//     "images/wash.png",
-//     "images/wash.png",
-//     "images/wash.png",
+//     "",
+//     "",
+//     "",
 //   ];
 //   final List<List<Widget>> textContents = [
 //     [const Text("Text for Page 1")],
